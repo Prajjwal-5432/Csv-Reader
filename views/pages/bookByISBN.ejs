@@ -1,0 +1,51 @@
+<html>
+  <%- include('../partials/head') %> <%- include('../partials/header') %>
+  <body>
+    <div class="container text-center">
+      <form>
+        <input
+          placeholder="Enter ISBN"
+          style="border: 1px solid #cccccc; padding: 8px"
+        />
+        <button class="btn mb-1 btn-primary">Search</button>
+      </form>
+      <p id="p1"></p>
+      <p id="p2"></p>
+      <p id="p3"></p>
+      <p id="p4"></p>
+    </div>
+  </body>
+  <%- include('../partials/footer') %>
+  <script>
+    const bookform = document.querySelector("form");
+    const search = document.querySelector("input");
+
+    let p1 = document.querySelector("#p1");
+    let p2 = document.querySelector("#p2");
+    let p3 = document.querySelector("#p3");
+    let p4 = document.querySelector("#p4");
+
+    bookform.addEventListener("submit", (e) => {
+      p1.textContent = "Loading";
+      p2.textContent = "";
+      p3.textContent = "";
+      p4.textContent = "";
+
+      e.preventDefault();
+
+      const isbn = search.value;
+      fetch(`book?isbn=${isbn}`).then((response) => {
+        response.json().then((data) => {
+          if (data.error) {
+            p1.textContent = data.error;
+          } else {
+            p1.textContent = `Title: ${data[0]["\ufefftitle"]}`;
+            p2.textContent = `ISBN: ${data[0].isbn}`;
+            p3.textContent = `Author: ${data[0].authors}`;
+            p4.textContent = `Description: ${data[0].description}`;
+          }
+        });
+      });
+    });
+  </script>
+</html>

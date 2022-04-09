@@ -1,0 +1,32 @@
+<html>
+  <%- include('../partials/head') %> <%- include('../partials/header') %>
+  <body>
+    <div class="container text-center">
+      <form>
+        <input
+          placeholder="Enter Email"
+          style="border: 1px solid #cccccc; padding: 8px"
+        />
+        <button class="btn mb-1 btn-primary">Search</button>
+        <h6>Please check Your console after pressing search</h6>
+      </form>
+      </div>
+    </div>
+  </body>
+  <%- include('../partials/footer') %>
+  <script>
+    const bookform = document.querySelector("form");
+    const search = document.querySelector("input");
+
+    bookform.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const email = search.value;
+      fetch(`author?email=${email}`).then((response) => {
+        response.json().then((data) => {
+          console.log(data)
+        });
+      });
+    });
+  </script>
+</html>

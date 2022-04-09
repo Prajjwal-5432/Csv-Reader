@@ -1,0 +1,18 @@
+<html>
+  <%- include('../partials/head') %> <%- include('../partials/header') %>
+  <body class="container text-center">
+    <div class="row">
+      <% data.forEach((book, i) => { %>
+      <div class="card col-3">
+        <div class="card-body">
+          <h5 class="card-title"><%= data[i]["\ufefftitle"]%></h5>
+          <h6 class="card-subtitle mb-2"><%= data[i].authors %></h6>
+          <h6 class="card-subtitle mb-2"><%= data[i].isbn %></h6>
+          <p class="card-text"><%= data[i].description%></p>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+  </body>
+  <%- include('../partials/footer') %>
+</html>
